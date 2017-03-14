@@ -23,6 +23,7 @@ public class TeamResource {
 		return tService.findAll();
 	}
 	
+	
     @GET
     @Path("{id}")
     public Team findTeamById(@PathParam("id") String id) {

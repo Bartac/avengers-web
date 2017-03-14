@@ -24,6 +24,8 @@ public class MovieResource {
 		return mService.findAll();
 	}
 	
+	
+	
     @GET
     @Path("{id}")
     public Movie findMovieById(@PathParam("id") String id) {

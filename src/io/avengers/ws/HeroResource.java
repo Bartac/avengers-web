@@ -23,6 +23,7 @@ public class HeroResource {
 		
 	}
 	
+	
     @GET
     @Path("{id}")
     public Hero findHeroById(@PathParam("id") String id) {
