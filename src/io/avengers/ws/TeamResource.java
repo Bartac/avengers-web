@@ -25,7 +25,6 @@ public class TeamResource {
 	
     @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Team findTeamById(@PathParam("id") String id) {
 		TeamService tService = new TeamService();
         return tService.findTeamById(id);

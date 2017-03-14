@@ -25,7 +25,6 @@ public class HeroResource {
 	
     @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Hero findHeroById(@PathParam("id") String id) {
 		HeroService hService = new HeroService();
         return hService.findHeroesById(id);

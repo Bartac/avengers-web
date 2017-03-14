@@ -26,7 +26,6 @@ public class MovieResource {
 	
     @GET
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Movie findMovieById(@PathParam("id") String id) {
 		MovieService mService = new MovieService();
         return mService.findMoviesById(id);
