@@ -38,13 +38,14 @@ public class HeroResource {
     public Response createHero(Hero hero){
     
     	HeroService h = new HeroService();
-    	h.createHero(hero.getName());
+
     	
-    	if(hero.getName() == null)
+    	if(hero.getName().isEmpty())
     	{
     		return Response.status(406).entity("\"empty comment\"").build();
     	}
 
+    	h.createHero(hero.getName(),hero.getReal_name());
     	return Response.status(201).entity("\"" + h+"\"").build();
     }
     
