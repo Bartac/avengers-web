@@ -1,5 +1,6 @@
 package io.avengers.ws;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
@@ -15,8 +16,10 @@ import javax.ws.rs.core.Response;
 
 import io.avengers.domain.Hero;
 import io.avengers.domain.Movie;
+import io.avengers.domain.Team;
 import io.avengers.service.HeroService;
 import io.avengers.service.MovieService;
+import io.avengers.service.TeamService;
 
 @Path("heroes")
 @Produces(MediaType.APPLICATION_JSON)
