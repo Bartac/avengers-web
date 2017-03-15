@@ -39,7 +39,6 @@ public class HeroResource {
     public Response createHero(Hero hero){
     
     	HeroService h = new HeroService();
-
     	
     	if(hero.getName().isEmpty())
     	{
@@ -47,8 +46,18 @@ public class HeroResource {
     	}
 
     	h.createHero(hero.getName(),hero.getReal_name());
+    	h.addHeroToTeam(hero.getTeam_name(), hero.getName());
     	return Response.status(201).entity("\"" + h+"\"").build();
     }
+        /*@POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addHeroToTeam(Hero hero){
+    	
+    	HeroService h = new HeroService();
+    	System.out.println(hero.getTeam_name());
+    	h.addHeroToTeam(hero.getTeam_name(),hero.getName());
+    	return Response.status(201).entity("\"" + h+"\"").build();
+    }*/
     
     @DELETE
 	@Path("{id}")
@@ -63,4 +72,5 @@ public class HeroResource {
 		return Response.noContent().header("X--message", "Deleted " +hero.getName()+" "+hero.getReal_name()).build();
 	}
     
+
 }
