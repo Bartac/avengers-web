@@ -35,31 +35,45 @@ public class HeroResource {
 		HeroService hService = new HeroService();
         return hService.findHeroesById(id);
     }
-    /*
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createHero(Hero hero){
     
-    	HeroService h = new HeroService();
-    	
+    	HeroService hService = new HeroService();
+		Set<Hero> h = hService.findHeroesByName(hero.getName());
+		Iterator<Hero>itHero =h.iterator();
+
+		if(itHero.hasNext()){
+			Hero h2 = itHero.next();
+			if(h2.getName().equals(hero.getName()))
+			{
+				return Response.status(406).entity("\"name already existing\"").build();
+			}
+		}
+		
+		TeamService tService = new TeamService();
+		Set<Team> t = tService.findTeamByName(hero.getTeam_name());
+		Iterator<Team> itTeam = t.iterator();
+		
+		if(itTeam.hasNext() ){
+			Team t2 = itTeam.next();
+			if(!t2.getTeam_name().equals(hero.getTeam_name())){
+				tService.createTeam(hero.getTeam_name());
+			}
+		}
+		if(!itTeam.hasNext()){
+			tService.createTeam(hero.getTeam_name());
+		}
+
     	if(hero.getName().isEmpty())
     	{
     		return Response.status(406).entity("\"empty comment\"").build();
     	}
 
-    	h.createHero(hero.getName(),hero.getReal_name());
-    	h.addHeroToTeam(hero.getTeam_name(), hero.getName());
-    	return Response.status(201).entity("\"" + h+"\"").build();
+    	hService.createHero(hero.getName(),hero.getReal_name());
+    	hService.addHeroToTeam(hero.getTeam_name(), hero.getName());
+    	return Response.status(201).entity("\"" + hService+"\"").build();
     }
-        @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response addHeroToTeam(Hero hero){
-    	
-    	HeroService h = new HeroService();
-    	System.out.println(hero.getTeam_name());
-    	h.addHeroToTeam(hero.getTeam_name(),hero.getName());
-    	return Response.status(201).entity("\"" + h+"\"").build();
-    }*/
     
     @DELETE
 	@Path("{id}")
