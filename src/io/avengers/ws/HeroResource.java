@@ -3,7 +3,9 @@ package io.avengers.ws;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -47,5 +49,18 @@ public class HeroResource {
     	h.createHero(hero.getName(),hero.getReal_name());
     	return Response.status(201).entity("\"" + h+"\"").build();
     }
+    
+    @DELETE
+	@Path("{id}")
+	public Response deleteHero(@PathParam("id") String id){
+		HeroService hService = new HeroService();
+    	Hero hero = hService.findHeroesById(id);
+
+		if (hero == null){
+			throw new NotFoundException("Can't find this number "+ id);
+		}
+		new HeroService().deleteHero(hero.getId());
+		return Response.noContent().header("X--message", "Deleted " +hero.getName()+" "+hero.getReal_name()).build();
+	}
     
 }
