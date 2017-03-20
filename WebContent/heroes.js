@@ -1,50 +1,74 @@
-
-
-function application() {
-
-	fetchHeroes().then(function (heroes) {
-		console.log('Found heroes', heroes);
-		displayHeroes(heroes);
-	});
-}
-
-function fetchHeroes() {
-	console.log('Fetching Heroes');
-	return fetch('marvel/heroes').then(resp => resp.json());
+function HeroListCompenent() {
 
 }
 
-function displayHeroes(heroes) {
-	// Create ul
-	const ul = document.createElement("ul");
-	document.body.appendChild(ul);
-	heroes.forEach(heroes => displayHero(heroes));
+HeroListCompenent.prototype = {
+	fetchAll: function () {
+		return $.get('marvel/heroes')
+			//.then(resp => resp.json())
+			.then(json => {
+				this.collection = [];
+				json.forEach(data => {
+					const hero = new HeroItem(data, this);
+					this.collection.push(hero);
+				});
+				return this.collection;
+			});
+	},
+	render: function () {
+		const template = `<div>
+		<h1>Hero List</h1>
+		<ul>
+		</ul>
+		<footer> Some footer</footer>
+		</div>`;
+
+		//cached component element
+		this.$el = $(template);
+		console.log(this.$el);
+
+		this.collection.forEach(hero => this.$el.find('ul').append(hero.render()));
+		$('body').append(this.$el);
+		return this.$el;
+
+	}
 }
 
-function displayHero(hero) {
-	console.log("hero ", hero.name);
 
-	// search ul
-	const ul = document.querySelector("ul");
-
-	// create <li></li>
-	const li = document.createElement("li");
-	const text = document.createTextNode(hero.name);
-	li.appendChild(text);
-	ul.appendChild(li)
-
-	// create button
-	const button = document.createElement("button");
-	button.appendChild(document.createTextNode("Delete " + hero.name));
-	li.appendChild(button);
-	button.addEventListener('click', function (event) {
-		console.log(hero.name + " deleted");
-		removeUser(hero.id);
-	});
+function HeroItem(data, listComponent) {
+	Object.assign(this, data);
+	this.listComponent = listComponent;
+	this.collection = listComponent.collection;
 }
 
-function removeUser(id) {
+HeroItem.prototype = {
 
+	render() {
+
+		const template = `<li>
+		Name : ${this.name} </br>
+		Real name : ${this.real_name}</br>
+		Team name : ${this.team_name}</br>
+		</li>`;
+		
+		
+		// Element queryfied
+		this.$el = $(template);
+		// Catch the button without readin all dom with find()
+		//const button = this.$el.find('button').on('click', evt => this.remove());  // Fat arrow already binded to this
+		return this.$el;
+
+
+	},
+	/*remove() {
+		fetch('api/users/' + this.id, { method: 'delete' })
+			.catch(error => application());
+
+		// newsgtate
+		component.collection = component.collection.filter(user => user.id !== this.id);
+
+		this.$el.remove();
+	}*/
 }
 
-application()
+
