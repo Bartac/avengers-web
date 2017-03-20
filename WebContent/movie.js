@@ -19,20 +19,20 @@ MovieListCompenent.prototype = {
         const template = `<div>
 		<h1>Movie List</h1>
 		<ul>
-        <form>
+		</ul>
+       		 <form>
 			Movie name:<br>
 				<input class='movie' type="text" name="movies" value="">
 				<br>
 				<button class="create" type="button">Create</button>
 			</form> 
-		</ul>
 		<footer> Some footer</footer>
 		</div>`;
 
         //cached component element
         this.$el = $(template);
         console.log(this.$el);
-
+	
         this.collection.forEach(movie => this.$el.find('ul').append(movie.render()));
         $('body').append(this.$el);
         return this.$el;
@@ -54,6 +54,7 @@ MovieItem.prototype = {
         const template = `<li>
 		Movie Name : ${this.name} </br>
         Heroes  : ${this.heroes_name} </br>
+<button class='delete' value='${this.id}>Delete ${this.name}</button>
 
 		</li>`;
 
@@ -61,20 +62,20 @@ MovieItem.prototype = {
         // Element queryfied
         this.$el = $(template);
         // Catch the button without readin all dom with find()
-        //const button = this.$el.find('button').on('click', evt => this.remove());  // Fat arrow already binded to this
+        const button = this.$el.find('button.delete').on('click', evt => this.remove());  // Fat arrow already binded to this
         return this.$el;
 
 
     },
-	/*remove() {
-		fetch('api/users/' + this.id, { method: 'delete' })
+	remove() {
+		fetch('marvel/movies/' + this.id, { method: 'delete' })
 			.catch(error => application());
 
 		// newsgtate
 		component.collection = component.collection.filter(user => user.id !== this.id);
 
 		this.$el.remove();
-	}*/
+	}
 }
 
 
