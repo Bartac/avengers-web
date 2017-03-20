@@ -43,7 +43,7 @@ HeroListCompenent.prototype = {
 		const button = this.$el.find('button.create').on('click', evt => this.add());  // Fat arrow already binded to this
 
 
-		this.collection.forEach(hero => this.$el.find('ul').append(hero.render()));
+		this.collection.forEach(hero => this.$el.find('ul').append(hero.renderCheck()));
 		$('body').append(this.$el);
 		return this.$el;
 
@@ -118,6 +118,21 @@ HeroItem.prototype = {
 		this.$el.remove();
 	}*/
 
+		renderCheck() {
+
+		const template = `<li>
+		<input type="checkbox" class="${this.name}" value="${this.name}"> ${this.name}<br>
+		</br>
+		
+		</li>`;
+
+
+		// Element queryfied
+		this.$el = $(template);
+		// Catch the button without readin all dom with find()
+		//const button = this.$el.find('button').on('click', evt => this.remove());  // Fat arrow already binded to this
+		return this.$el;
+		}
 	
 }
 
