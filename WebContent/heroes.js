@@ -30,6 +30,10 @@ HeroListCompenent.prototype = {
 			team name:<br>
 				<input class='teamname' name="teamname" value="">
 				<br>
+<select name="teamname">
+  <option value="Avengers">Avengers</option>
+  <option value="XMen">Xmen</option>
+</select>
 				<button class="create" type="button">Create</button>
 			</form> 
 		<footer> Some footer</footer>
