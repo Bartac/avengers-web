@@ -97,26 +97,26 @@ HeroItem.prototype = {
 		Name : ${this.name} </br>
 		Real name : ${this.real_name}</br>
 		Team name : ${this.team_name}</br>
+		<button class="delete" value="${this.id}>Delete ${this.name}</button>
 		</li>`;
 
 
 		// Element queryfied
 		this.$el = $(template);
 		// Catch the button without readin all dom with find()
-		//const button = this.$el.find('button').on('click', evt => this.remove());  // Fat arrow already binded to this
+		const button = this.$el.find('button.delete').on('click', evt => this.remove());  // Fat arrow already binded to this
 		return this.$el;
 
 
 	},
-	/*remove() {
-		fetch('api/users/' + this.id, { method: 'delete' })
+		remove() {
+		fetch('marvel/heroes/' + this.id, { method: 'delete' })
 			.catch(error => application());
 
 		// newsgtate
 		component.collection = component.collection.filter(user => user.id !== this.id);
-
 		this.$el.remove();
-	}*/
+	}
 
 		renderCheck() {
 
