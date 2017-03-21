@@ -129,11 +129,12 @@ MovieListCompenent.prototype = {
         //Create button click
         const button = this.$el.find('button.createmovie').on('click', evt => this.add());  // Fat arrow already binded to this
 
+component.fetchAll();
         // Render Movie data
-        this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()));
+        this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()))
 
         // Render Hero Checkbox data
-        component.collection.forEach(hero => this.$el.find('div.checkhero').append(hero.renderC()));
+        component.collection.forEach(hero => this.$el.find('div.checkhero').then(append(hero.renderC())));
 
         // Add data to the body
         $('body').append(this.$el);
