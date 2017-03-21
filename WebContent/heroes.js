@@ -85,8 +85,8 @@ HeroListCompenent.prototype = {
 
                 // Case 2 : Delete body and render all
                 this.$el.find('div.hero').remove();
-                this.fetchAll().then(function () {
-                    this.render();
+                component.fetchAll().then(function () {
+                    component.render();
                 });
             });
     }
