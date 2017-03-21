@@ -36,11 +36,7 @@ HeroListCompenent.prototype = {
 			<form>
 			Name: <input class='name' type="text" name="name" value=""></br>
 			Real name: <input class='realname' type="text" name="realname" value=""></br>
-			Team name:
-                <select class="teamname">
-                <option value="Avengers">Avengers</option>
-                <option value="Xmen">Xmen</option>
-                </select></br>
+			Team name: <input class='teamname' type="text" name="realname" value=""></br>
 				<button class="create" type="button">Create</button></br>
 			</form> 
 		<footer> Some footer</footer>
@@ -66,7 +62,7 @@ HeroListCompenent.prototype = {
         // Recuperer les valeurs du formulaire
         const name = $('input.name').val();
         const real_name = $('input.realname').val();
-        const team_name = $('select.teamname:select').val();
+        const team_name = $('input.teamname').val();
 
         const heroadded = {name, real_name, team_name };
 
