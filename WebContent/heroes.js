@@ -233,6 +233,7 @@ HeroItem.prototype = {
 
         // Element queryfied
         this.$el = $(template);
+        console.log("Added " +this.name);
         return this.$el;
     }
 
