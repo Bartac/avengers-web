@@ -77,14 +77,14 @@ HeroListCompenent.prototype = {
                 body: JSON.stringify(heroadded)
             })
             .then(resp => {
-                const item = new HeroItem(heroadded, this);
-                this.collection.push(item);
+               // const item = new HeroItem(heroadded, this);
+                //this.collection.push(item);
 
                 //Add item to the end
                 //this.$el.append(item.render());
 
                 // Case 2 : Delete body and render all
-                this.$el.find('div.hero').remove();
+                $('div.hero').remove();
                 component.fetchAll().then(function () {
                     component.render();
                 });
