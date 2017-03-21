@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import io.avengers.domain.Movie;
+import io.avengers.service.HeroService;
 import io.avengers.service.MovieService;
 
 @Path("movies")
@@ -41,7 +42,13 @@ public class MovieResource {
 			return Response.status(406).entity("\"Name Empty\"").build();
     	}
     	
-    	mService.createMovie(movie.getName());
+    	HeroService hService = new HeroService();
+    	int movie_id = mService.createMovie(movie.getName());
+    	for (int i =0;i<movie.getHeroes_name().size();i++){
+    		hService.addHeroToMovie(movie_id, Integer.parseInt(movie.getHeroes_name().get(i)));
+    	}
+    	
+    	
 		return Response.status(201).entity("\""+movie+"\"").build();
 		
     }
