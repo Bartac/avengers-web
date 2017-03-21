@@ -1,143 +1,277 @@
+let movie;
+let hero;
+
 function HeroListCompenent() {
 
 }
 
+function MovieListCompenent() {
+
+}
+
+function TeamListCompenent() {
+
+}
+
 HeroListCompenent.prototype = {
-	fetchAll: function () {
-		return $.get('marvel/heroes')
-			//.then(resp => resp.json())
-			.then(json => {
-				this.collection = [];
-				json.forEach(data => {
-					const hero = new HeroItem(data, this);
-					this.collection.push(hero);
-				});
-				return this.collection;
-			});
-	},
-	render: function () {
-		const template = `<div>
+    fetchAll: function () {
+        return $.get('marvel/heroes')
+            //.then(resp => resp.json(1))
+            .then(json => {
+                this.collection = [];
+                json.forEach(data => {
+                    hero = new HeroItem(data, this);
+                    this.collection.push(hero);
+                });
+                return this.collection;
+            });
+    },
+    render: function () {
+
+        // Create Template
+        const template = `<div class='hero'>
 		<h1>Hero List</h1>
-		<ul>
+		<ul class='hero'>
 		</ul>
 			<form>
-			name:<br>
-				<input class='name' type="text" name="name" value="">
-				<br>
-			real name:<br>
-				<input class='realname' type="text" name="realname" value="">
-				<br>
-			team name:<br>
-				<input class='teamname' name="teamname" value="">
-				<br>
-<select name="teamname">
-  <option value="Avengers">Avengers</option>
-  <option value="XMen">Xmen</option>
-</select>
-				<button class="create" type="button">Create</button>
+			Name: <input class='name' type="text" name="name" value=""></br>
+			Real name: <input class='realname' type="text" name="realname" value=""></br>
+			Team name:
+                <select class="teamname">
+                <option value="Avengers">Avengers</option>
+                <option value="Xmen">Xmen</option>
+                </select></br>
+				<button class="create" type="button">Create</button></br>
 			</form> 
 		<footer> Some footer</footer>
 		</div>`;
 
-		//cached component element
-		this.$el = $(template);
-		console.log(this.$el);
+        //cached component element
+        this.$el = $(template);
+        console.log(this.$el);
 
-		//Create button click
-		const button = this.$el.find('button.create').on('click', evt => this.add());  // Fat arrow already binded to this
+        //Create button click
+        const button = this.$el.find('button.create').on('click', evt => this.add());  // Fat arrow already binded to this
+
+        // Render Hero data
+        this.collection.forEach(hero => this.$el.find('ul.hero').append(hero.render()));
+
+        // Add data to the body
+        $('body').append(this.$el);
+        return this.$el;
+
+    },
+
+    add: function () {
+        // Recuperer les valeurs du formulaire
+        const name = $('input.name').val();
+        const real_name = $('input.realname').val();
+        const team_name = $('select.teamname:select').val();
+
+        const heroadded = {name, real_name, team_name };
+
+        //Create les valeurs dans la base de données
+        fetch('marvel/heroes',
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(heroadded)
+            })
+            .then(resp => {
+                const item = new HeroItem(heroadded, this);
+                this.collection.push(item);
+
+                //Add item to the end
+                this.$el.append(item.render());
+
+                // Case 2 : Delete body and render all
+                //this.$el.remove();
+                //this.render();
+            });
+    }
+
+}
+
+MovieListCompenent.prototype = {
+    fetchAll: function () {
+        return $.get('marvel/movies')
+            //.then(resp => resp.json(1))
+            .then(json => {
+                this.collection = [];
+                json.forEach(data => {
+                    movie = new MovieItem(data, this);
+                    this.collection.push(movie);
+                });
+                return this.collection;
+            });
+    },
+    render: function () {
+
+        // Create Template
+        const template = `<div class='movie'>
+		<h1>Movie List</h1>
+		<ul class='movie'>
+		</ul>
+            <form>
+            Movie: <input class='moviename' type="text" name="moviename" value=""></br>
+            <div class='checkhero'></div>
+				<button class="createmovie" type="button">Create</button></br>
+			</form> 
+		<footer> Some footer</footer>
+		</div>`;
 
 
-		this.collection.forEach(hero => this.$el.find('ul').append(hero.renderCheck()));
-		$('body').append(this.$el);
-		return this.$el;
+        //TODO Add form : Create Movie with a list of heroes
 
-	},
-	
-	add: function() {
-		// Recuperer les valeurs du formulaire
-		const name = $('input.name').val();
-		const real_name = $('input.realname').val();
-		const team_name = $('input.teamname').val();
+        //cached component element
+        this.$el = $(template);
+        console.log(this.$el);
 
-		const hero = {name:name,real_name,team_name};
+        //Create button click
+        const button = this.$el.find('button.createmovie').on('click', evt => this.add());  // Fat arrow already binded to this
 
-		//Create les valeurs dans la base de données
-		fetch('marvel/heroes',
-			{
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				method: "POST",
-				body: JSON.stringify(hero)
-			})
-			.then(resp => {
-				const item = new HeroItem(hero, this);
-				this.collection.push(item);
-				this.$el.append(item.render());
-				//this.$el.remove();
-				//this.render();
-			});
+        // Render Movie data
+        this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()));
 
-		// Mettre à jour l'affichage
-		//this.fetchAll();
-		//this.render();
-	}
-	
+        // Render Hero Checkbox data
+        component.collection.forEach(hero => this.$el.find('div.checkhero').append(hero.renderC()));
+
+        // Add data to the body
+        $('body').append(this.$el);
+        return this.$el;
+
+    },
+
+    add: function () {
+        // Recuperer les valeurs du formulaire
+        const name = $('input.movie').val();
+        const heroes_name = [];
+        $('#checkboxes input.check:checked').each(function () {
+            heroes_name.push($(this).val());
+        });
+        const movieadded = { name: name, heroes_name };
+
+        //Create les valeurs dans la base de données
+        fetch('marvel/movies',
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(movieadded)
+            })
+            .then(resp => {
+                const itemM = new MovieItem(movieadded, this);
+                this.collection.push(itemM);
+
+                //Add item to the end
+                this.$el.append(item.render());
+
+                // Case 2 : Delete body and render all
+                //this.$el.remove();
+                //this.render();
+            });
+    }
+
 }
 
 
 function HeroItem(data, listComponent) {
-	Object.assign(this, data);
-	this.listComponent = listComponent;
-	this.collection = listComponent.collection;
+    Object.assign(this, data);
+    this.listComponent = listComponent;
+    this.collection = listComponent.collection;
+}
+
+function MovieItem(data, listComponent) {
+    Object.assign(this, data);
+    this.listComponent = listComponent;
+    this.collection = listComponent.collection;
+}
+
+function TeamItem(data, listComponent) {
+    Object.assign(this, data);
+    this.listComponent = listComponent;
+    this.collection = listComponent.collection;
 }
 
 HeroItem.prototype = {
 
-	render() {
+    render() {
 
-		const template = `<li>
+        // Create Template
+        const template = `<li>
 		Name : ${this.name} </br>
 		Real name : ${this.real_name}</br>
 		Team name : ${this.team_name}</br>
-		<button class="delete" value="${this.id}>Delete ${this.name}</button>
+		<button class="delete" value="${this.id}">Delete ${this.name}</button>
 		</li>`;
 
 
-		// Element queryfied
-		this.$el = $(template);
-		// Catch the button without readin all dom with find()
-		const button = this.$el.find('button.delete').on('click', evt => this.remove());  // Fat arrow already binded to this
-		return this.$el;
+        // Element queryfied
+        this.$el = $(template);
+
+        // Catch the button without readin all dom with find()
+        const button = this.$el.find('button.delete').on('click', evt => this.remove());  // Fat arrow already binded to this
+        return this.$el;
 
 
-	},
-		remove() {
-		fetch('marvel/heroes/' + this.id, { method: 'delete' })
-			.catch(error => application());
+    },
+    remove() {
+        fetch('marvel/heroes/' + this.id, { method: 'delete' })
+            .catch(error => application());
 
-		// newsgtate
-		component.collection = component.collection.filter(user => user.id !== this.id);
-		this.$el.remove();
-	}
+        // newsgtate
+        component.collection = component.collection.filter(hero => hero.id !== this.id);
+        this.$el.remove();
+    },
 
-		renderCheck() {
+    renderC() {
+        // Create Template
+        const template = `<li>
+        <input class='check' type="Checkbox" value="${this.id}">${this.name}</br>
+		</li>`;
 
-		const template = `<li>
-		<input type="checkbox" class="${this.name}" value="${this.name}"> ${this.name}<br>
-		</br>
-		
+        // Element queryfied
+        this.$el = $(template);
+        return this.$el;
+    }
+
+}
+
+MovieItem.prototype = {
+
+    render() {
+
+        // Create Template
+        const template = `<li>
+		Movie : ${this.name} </br>
+		Heroes name : ${this.heroes_name}</br>
+		<button class="deletemovie" value="${this.id}>Delete ${this.name}</button>
 		</li>`;
 
 
-		// Element queryfied
-		this.$el = $(template);
-		// Catch the button without readin all dom with find()
-		//const button = this.$el.find('button').on('click', evt => this.remove());  // Fat arrow already binded to this
-		return this.$el;
-		}
-	
+        // Element queryfied
+        this.$el = $(template);
+
+        // Catch the button without readin all dom with find()
+        const button = this.$el.find('button.deletemovie').on('click', evt => this.remove());  // Fat arrow already binded to this
+        return this.$el;
+
+
+    },
+    remove() {
+        fetch('marvel/movies/' + this.id, { method: 'delete' })
+            .catch(error => application());
+
+        // newsgtate
+        //component.collection = component.collection.filter(user => user.id !== this.id);
+        //this.$el.remove();
+    }
+
 }
 
 
