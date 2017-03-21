@@ -63,9 +63,8 @@ HeroListCompenent.prototype = {
         const name = $('input.name').val();
         const real_name = $('input.realname').val();
         const team_name = $('input.teamname').val();
-        const id;
 
-        const heroadded = { id, name, real_name, team_name };
+        const heroadded = {name, real_name, team_name };
 
         //Create les valeurs dans la base de données
         fetch('marvel/heroes',
