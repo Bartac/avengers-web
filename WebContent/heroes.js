@@ -230,6 +230,7 @@ HeroItem.prototype = {
 
         // newsgtate
         component.collection = component.collection.filter(hero => hero.id !== this.id);
+        console.log('Deleted :'+this.name);
         this.$el.remove();
     },
 
@@ -255,7 +256,7 @@ MovieItem.prototype = {
         const template = `<li>
 		Movie : ${this.name} </br>
 		Heroes name : ${this.heroes_name}</br>
-		<button class="deletemovie" value="${this.id}>Delete ${this.name}</button>
+		<button class="deletemovie" value="${this.id}">Delete ${this.name}</button>
 		</li>`;
 
 
@@ -273,8 +274,9 @@ MovieItem.prototype = {
             .catch(error => application());
 
         // newsgtate
-        //component.collection = component.collection.filter(user => user.id !== this.id);
-        //this.$el.remove();
+        component2.collection = component2.collection.filter(movie => movie.id !== this.id);
+        console.log('Deleted :'+this.name);
+        this.$el.remove();
     }
 
 }
