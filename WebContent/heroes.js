@@ -131,7 +131,6 @@ MovieListCompenent.prototype = {
         //Create button click
         const button = this.$el.find('button.createmovie').on('click', evt => this.add());  // Fat arrow already binded to this
 
-component.fetchAll();
         // Render Movie data
         this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()))
 
