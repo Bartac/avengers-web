@@ -81,11 +81,13 @@ HeroListCompenent.prototype = {
                 this.collection.push(item);
 
                 //Add item to the end
-                this.$el.append(item.render());
+                //this.$el.append(item.render());
 
                 // Case 2 : Delete body and render all
-                //this.$el.remove();
-                //this.render();
+                this.$el.find('div.hero').remove();
+                this.fetchAll().then(function () {
+                    this.render();
+                });
             });
     }
 
@@ -234,6 +236,7 @@ HeroItem.prototype = {
 
         // Element queryfied
         this.$el = $(template);
+        console.log("Added " + this.name);
         return this.$el;
     }
 

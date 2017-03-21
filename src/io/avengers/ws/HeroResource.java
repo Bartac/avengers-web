@@ -73,7 +73,7 @@ public class HeroResource {
     		return Response.status(406).entity("\"empty comment\"").build();
     	}
 
-    	hService.createHero(hero.getName(),hero.getReal_name());
+    	hero.setId(hService.createHero(hero.getName(),hero.getReal_name()));
     	hService.addHeroToTeam(hero.getTeam_name(), hero.getName());
     	return Response.status(201).entity("\"" + hService+"\"").build();
     }
