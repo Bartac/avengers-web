@@ -1,7 +1,98 @@
-body{
-	background-color: #8080ff;
+body {
+    background-color: black;
 }
 
-li button {
-	margin-left: 10px;
+#page {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 340px;
+    right: 340px;
+    display: flex;
+    flex-direction: column;
+    background-color: bisque;
+}
+
+#head {
+    display: flex;
+    height: 380px;
+    background-color: black;    
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    color: beige;
+    background-color: black;
+}
+
+footer {
+    display: flex;
+    height: 30px;
+    background-color: black;
+}
+
+#contenu {
+    position: relative;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    flex-direction: row;
+    background-color: black;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    list-style: none;
+}
+        
+nav ul li {
+    flex: 0 1 auto;
+    font-size: 1.2em;
+    font-family: Impact, "Arial Black", Arial, Verdana, sans-serif;
+    line-height: 2em;
+    padding: 0 3em;
+}
+        
+nav ul li:hover {
+    background-color: #333;
+    font-size: 1.4em;
+}
+
+#contenu-wrapper{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#transparent {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 45%);
+}
+
+#news {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    overflow: auto;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#news1 {
+    flex-shrink: 0;
+    border: 50px medium black;
+    margin: 4em;
+    height: 300px;
+    width: 300px;
+    border-radius: 150px;
+    background-color: darkgray;
 }
