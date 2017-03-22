@@ -83,8 +83,9 @@ MovieListCompenent.prototype = {
             })
             .then(resp => {
                 $('div.movie').remove();
-                component2.fetchAll().then(function () {
-                    component2.render();
+                const me = this;
+                me.fetchAll().then(function () {
+                    me.render();
                 });
                 //const itemM = new MovieItem(movieadded, this);
                 //this.collection.push(itemM);
@@ -132,7 +133,7 @@ MovieItem.prototype = {
             .catch(error => application());
 
         // newsgtate
-        component2.collection = component2.collection.filter(movie => movie.id !== this.id);
+        //component2.collection = component2.collection.filter(movie => movie.id !== this.id);
         console.log('Deleted :'+this.name);
         this.$el.remove();
     }
