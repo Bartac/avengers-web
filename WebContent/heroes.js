@@ -35,12 +35,11 @@ HeroListCompenent.prototype = {
 		<ul class='hero'>
 		</ul>
 			<form>
-			Name: <input class='name' type="text" name="name" value="">
-			Real name: <input class='realname' type="text" name="realname" value="">
-			Team name: <input class='teamname' type="text" name="realname" value="">
-				<button class="create" type="button">Create</button>
-
-			</form>
+			Name: <input class='name' type="text" name="name" value=""></br>
+			Real name: <input class='realname' type="text" name="realname" value=""></br>
+			Team name: <input class='teamname' type="text" name="realname" value=""></br>
+				<button class="create" type="button">Create</button></br>
+			</form> 
 		<footer> Some footer</footer>
 		</div>`;
 
@@ -118,7 +117,7 @@ MovieListCompenent.prototype = {
             <form>
             Movie: <input class='moviename' type="text" name="moviename" value=""></br>
             <div class='checkhero'></div>
-				<button class="createmovie" type="button">Create</button>
+				<button class="createmovie" type="button">Create</button></br>
 			</form> 
 		<footer> Some footer</footer>
 		</div>`;
@@ -134,7 +133,7 @@ MovieListCompenent.prototype = {
         const button = this.$el.find('button.createmovie').on('click', evt => this.add());  // Fat arrow already binded to this
 
         // Render Movie data
-        this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()));
+        this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()))
 
         // Render Hero Checkbox data
         component.collection.forEach(hero => this.$el.find('div.checkhero').append(hero.renderC()));
@@ -147,12 +146,14 @@ MovieListCompenent.prototype = {
 
     add: function () {
         // Recuperer les valeurs du formulaire
-        const name = $('input.movie').val();
+        const name = $('input.moviename').val();
         const heroes_name = [];
-        $('#checkboxes input.check:checked').each(function () {
+        $('input.check:checked').each(function () {
             heroes_name.push($(this).val());
         });
-        const movieadded = { name: name, heroes_name };
+        const movieadded = {name, heroes_name };
+        console.log('Movie added '+ movieadded.name);
+        console.log('Heroes added '+ movieadded.heroes_name);
 
         //Create les valeurs dans la base de données
         fetch('marvel/movies',
@@ -165,11 +166,15 @@ MovieListCompenent.prototype = {
                 body: JSON.stringify(movieadded)
             })
             .then(resp => {
-                const itemM = new MovieItem(movieadded, this);
-                this.collection.push(itemM);
+                $('div.movie').remove();
+                component2.fetchAll().then(function () {
+                    component2.render();
+                });
+                //const itemM = new MovieItem(movieadded, this);
+                //this.collection.push(itemM);
 
                 //Add item to the end
-                this.$el.append(item.render());
+                //this.$el.append(item.render());
 
                 // Case 2 : Delete body and render all
                 //this.$el.remove();
@@ -300,7 +305,7 @@ HeroItem.prototype = {
     render() {
 
         // Create Template
-        const template = `<li class="hero">
+        const template = `<li>
 		Name : ${this.name} </br>
 		Real name : ${this.real_name}</br>
 		Team name : ${this.team_name}</br>
