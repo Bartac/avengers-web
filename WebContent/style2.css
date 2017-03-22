@@ -3,11 +3,6 @@ body{
 }
 
 div.page {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 340px;
-    right: 340px;
     display: flex;
     flex-direction: column;
     background-color: bisque;

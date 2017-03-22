@@ -2,7 +2,7 @@ body {
     background-color: black;
 }
 
-#page {
+div.page {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -13,7 +13,7 @@ body {
     background-color: bisque;
 }
 
-#head {
+div.head {
     display: flex;
     height: 380px;
     background-color: black;    
