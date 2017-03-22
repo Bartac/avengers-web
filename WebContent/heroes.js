@@ -363,11 +363,7 @@ MovieItem.prototype = {
         const template = `<li>
 		Movie : ${this.name} </br>
 		Heroes name : ${this.heroes_name}</br>
-<<<<<<< HEAD
 		<button class="deletemovie" value="${this.id}>Delete ${this.name}</button></br>
-=======
-		<button class="deletemovie" value="${this.id}">Delete ${this.name}</button>
->>>>>>> branch 'master' of https://github.com/Bartac/avengers-web.git
 		</li>`;
 
 
