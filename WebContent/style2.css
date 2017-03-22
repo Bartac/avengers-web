@@ -1,0 +1,33 @@
+body{
+	background-color: #8080ff;
+}
+
+li button {
+	width: 200px;
+}
+
+body {
+	display: flex;
+	flex-direction: row ;
+}
+
+div {
+	height: 500px;
+}
+
+li  {
+	display: flex;
+    margin: 1em;
+    margin-right: 15em;
+    flex-direction: column;
+    text-align: center;
+}
+
+li hero{
+	margin-bottom: 1em;
+}
+
+li movie{
+	display: flex;
+	flex-direction: column;
+}
