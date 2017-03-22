@@ -1,6 +1,7 @@
 
 let component;
 let component2;
+let component3;
 
 function application() {
 
@@ -10,8 +11,13 @@ function application() {
 	});
 
 	component2 = new MovieListCompenent();
-	component2.fetchAll().then(function (movie) {
+	component2.fetchAll().then(function () {
 		component2.render();
+	});
+
+	component3 = new TeamListCompenent();
+	component3.fetchAll().then(function () {
+		component3.render();
 	});
 
 }
