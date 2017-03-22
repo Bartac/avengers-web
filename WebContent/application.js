@@ -9,10 +9,10 @@ let component3;
 
 function application() {
 
-	component = new HeroListCompenent();
+	/*component = new HeroListCompenent();
 	component.fetchAll().then(function () {
 		component.render();
-	});
+	});*/
 
 	component2 = new MovieListCompenent();
 	component2.fetchAll().then(function () {

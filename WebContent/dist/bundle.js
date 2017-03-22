@@ -123,7 +123,7 @@ HeroListCompenent.prototype = {
         this.collection.forEach(hero => this.$el.find('ul.hero').append(hero.render()));
 
         // Add data to the body
-        $('body').append(this.$el);
+        $('div.page').append(this.$el);
         return this.$el;
 
     },
@@ -285,6 +285,7 @@ MovieListCompenent.prototype = {
 
         //cached component element
         this.$el = $(template);
+        let me = this.$el;
         console.log(this.$el);
 
         //Create button click
@@ -294,8 +295,9 @@ MovieListCompenent.prototype = {
         this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()))
 
         // Render Hero Checkbox data
-        (new __WEBPACK_IMPORTED_MODULE_0__heroes__["a" /* HeroListCompenent */]().fetchAll()).then(function(){
-            this.collection.forEach(hero => this.$el.find('div.checkhero').append(hero.renderC()));
+        const temp = new __WEBPACK_IMPORTED_MODULE_0__heroes__["a" /* HeroListCompenent */]();
+        temp.fetchAll().then(function(){
+            temp.collection.forEach(hero => me.find('div.checkhero').append(hero.renderC()));
         });
 
         // Add data to the body
@@ -573,10 +575,10 @@ let component3;
 
 function application() {
 
-	component = new __WEBPACK_IMPORTED_MODULE_0__heroes__["a" /* HeroListCompenent */]();
+	/*component = new HeroListCompenent();
 	component.fetchAll().then(function () {
 		component.render();
-	});
+	});*/
 
 	component2 = new __WEBPACK_IMPORTED_MODULE_1__movie__["a" /* MovieListCompenent */]();
 	component2.fetchAll().then(function () {

@@ -39,6 +39,7 @@ MovieListCompenent.prototype = {
 
         //cached component element
         this.$el = $(template);
+        let me = this.$el;
         console.log(this.$el);
 
         //Create button click
@@ -48,8 +49,9 @@ MovieListCompenent.prototype = {
         this.collection.forEach(movie => this.$el.find('ul.movie').append(movie.render()))
 
         // Render Hero Checkbox data
-        new HeroListCompenent().fetchAll().then(function(){
-            this.collection.forEach(hero => this.$el.find('div.checkhero').append(hero.renderC()));
+        const temp = new HeroListCompenent();
+        temp.fetchAll().then(function(){
+            temp.collection.forEach(hero => me.find('div.checkhero').append(hero.renderC()));
         });
 
         // Add data to the body
