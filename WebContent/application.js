@@ -1,7 +1,11 @@
+import {HeroListCompenent} from './heroes'
+import {MovieListCompenent} from './movie'
+import {TeamListCompenent} from './teams'
 
 let component;
 let component2;
 let component3;
+
 
 function application() {
 

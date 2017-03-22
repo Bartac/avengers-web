@@ -18,5 +18,8 @@
   "homepage": "https://github.com/Bartac/avengers-web#readme",
   "dependencies": {
     "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^2.3.0"
   }
 }
