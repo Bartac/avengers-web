@@ -43,19 +43,23 @@ TeamListCompenent.prototype = {
 
         //cached component element
         this.$el = $(template);
+        let me = this.$el;
         console.log(this.$el);
 
         //Create button click
         const button = this.$el.find('button.createteam').on('click', evt => this.add());  // Fat arrow already binded to this
 
-        // Render Movie data
+        // Render Team data
         this.collection.forEach(team => this.$el.find('ul.team').append(team.render()))
 
-        //Render Selected Movie
+        //Render Selected Team
         this.collection.forEach(team => this.$el.find('select.team').append(team.renderS()))
 
         // Render Selected Hero
-        new HeroListCompenent().fetchAll().collection.forEach(hero => this.$el.find('select.hero').append(hero.renderS()))
+        const temp = new HeroListCompenent();
+        temp.fetchAll().then(function(){
+            temp.collection.forEach(hero => me.find('select.hero').append(hero.renderS()));
+        });
 
         //component.collection.forEach(team => this.$el.find('div.checkhero').append(team.renderC()));
 

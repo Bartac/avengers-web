@@ -123,7 +123,7 @@ HeroListCompenent.prototype = {
         this.collection.forEach(hero => this.$el.find('ul.hero').append(hero.render()));
 
         // Add data to the body
-        $('div.page').append(this.$el);
+        $('body').append(this.$el);
         return this.$el;
 
     },
@@ -439,19 +439,23 @@ TeamListCompenent.prototype = {
 
         //cached component element
         this.$el = $(template);
+        let me = this.$el;
         console.log(this.$el);
 
         //Create button click
         const button = this.$el.find('button.createteam').on('click', evt => this.add());  // Fat arrow already binded to this
 
-        // Render Movie data
+        // Render Team data
         this.collection.forEach(team => this.$el.find('ul.team').append(team.render()))
 
-        //Render Selected Movie
+        //Render Selected Team
         this.collection.forEach(team => this.$el.find('select.team').append(team.renderS()))
 
         // Render Selected Hero
-        new __WEBPACK_IMPORTED_MODULE_0__heroes__["a" /* HeroListCompenent */]().fetchAll().collection.forEach(hero => this.$el.find('select.hero').append(hero.renderS()))
+        const temp = new __WEBPACK_IMPORTED_MODULE_0__heroes__["a" /* HeroListCompenent */]();
+        temp.fetchAll().then(function(){
+            temp.collection.forEach(hero => me.find('select.hero').append(hero.renderS()));
+        });
 
         //component.collection.forEach(team => this.$el.find('div.checkhero').append(team.renderC()));
 
@@ -575,10 +579,10 @@ let component3;
 
 function application() {
 
-	/*component = new HeroListCompenent();
+	component = new __WEBPACK_IMPORTED_MODULE_0__heroes__["a" /* HeroListCompenent */]();
 	component.fetchAll().then(function () {
 		component.render();
-	});*/
+	});
 
 	component2 = new __WEBPACK_IMPORTED_MODULE_1__movie__["a" /* MovieListCompenent */]();
 	component2.fetchAll().then(function () {
