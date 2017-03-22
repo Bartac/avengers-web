@@ -368,7 +368,7 @@ MovieItem.prototype = {
         const template = `<li>
 		Movie : ${this.name} </br>
 		Heroes name : ${this.heroes_name}</br>
-		<button class="deletemovie" value="${this.id}>Delete ${this.name}</button></br>
+		<button class="deletemovie" value="${this.id}">Delete ${this.name}</button></br>
 		</li>`;
 
 
