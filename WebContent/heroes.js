@@ -46,7 +46,7 @@ HeroListCompenent.prototype = {
         this.collection.forEach(hero => this.$el.find('ul.hero').append(hero.render()));
 
         // Add data to the body
-        $('div.page').append(this.$el);
+        $('body').append(this.$el);
         return this.$el;
 
     },
