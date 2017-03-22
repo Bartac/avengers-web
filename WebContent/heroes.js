@@ -54,7 +54,7 @@ HeroListCompenent.prototype = {
         this.collection.forEach(hero => this.$el.find('ul.hero').append(hero.render()));
 
         // Add data to the body
-        $('body').append(this.$el);
+        $('div.page').append(this.$el);
         return this.$el;
 
     },
@@ -139,7 +139,7 @@ MovieListCompenent.prototype = {
         component.collection.forEach(hero => this.$el.find('div.checkhero').append(hero.renderC()));
 
         // Add data to the body
-        $('body').append(this.$el);
+        $('div.page').append(this.$el);
         return this.$el;
 
     },
@@ -236,7 +236,7 @@ TeamListCompenent.prototype = {
         //component.collection.forEach(team => this.$el.find('div.checkhero').append(team.renderC()));
 
         // Add data to the body
-        $('body').append(this.$el);
+        $('div.page').append(this.$el);
         return this.$el;
 
     },
