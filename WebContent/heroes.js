@@ -1,5 +1,3 @@
-import {MovieListCompenent} from './movie'
-import {TeamListCompenent} from './teams'
 let hero;
 
 export function HeroListCompenent() {
@@ -78,8 +76,9 @@ HeroListCompenent.prototype = {
 
                 // Case 2 : Delete body and render all
                 $('div.hero').remove();
-                component.fetchAll().then(function () {
-                    component.render();
+                const me = this;
+                me.fetchAll().then(function () {
+                    me.render();
                 });
             });
     }
@@ -119,7 +118,7 @@ HeroItem.prototype = {
             .catch(error => application());
 
         // newsgtate
-        component.collection = component.collection.filter(hero => hero.id !== this.id);
+        //component.collection = component.collection.filter(hero => hero.id !== this.id);
         console.log('Deleted :' + this.name);
         this.$el.remove();
     },

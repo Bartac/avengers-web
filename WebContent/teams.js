@@ -92,8 +92,9 @@ TeamListCompenent.prototype = {
             })
             .then(resp => {
                 $('div.movie').remove();
-                component3.fetchAll().then(function () {
-                    component3.render();
+                const me = this;
+                me.fetchAll().then(function () {
+                    me.render();
                 });
                 //const itemM = new MovieItem(movieadded, this);
                 //this.collection.push(itemM);
@@ -141,7 +142,7 @@ TeamItem.prototype = {
             .catch(error => application());
 
         // newsgtate
-        component3collection = component3.collection.filter(team => team.id !== this.id);
+        //component3collection = component3.collection.filter(team => team.id !== this.id);
         console.log('Deleted :' + this.team_name);
         this.$el.remove();
     },
