@@ -137,7 +137,7 @@ HeroItem.prototype = {
     renderS() {
 
         // Create Template
-        const template = `<option value="${this.id}">${this.name}</option>`;
+        const template = `<option class="hero" value="${this.id}">${this.name}</option>`;
 
 
         // Element queryfied

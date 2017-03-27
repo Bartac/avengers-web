@@ -212,7 +212,7 @@ HeroItem.prototype = {
     renderS() {
 
         // Create Template
-        const template = `<option value="${this.id}">${this.name}</option>`;
+        const template = `<option class="hero" value="${this.id}">${this.name}</option>`;
 
 
         // Element queryfied
@@ -465,14 +465,12 @@ TeamListCompenent.prototype = {
 
     add: function () {
         // Recuperer les valeurs du formulaire
-        const team_name = $('input.moviename').val();
-        const heroes_name = [];
-        $('input.check:checked').each(function () {
-            heroes_name.push($(this).val());
-        });
-        const movieadded = { name, heroes_name };
-        console.log('Movie added ' + movieadded.name);
-        console.log('Heroes added ' + movieadded.heroes_name);
+        const team_name = $('select.team').val();
+        const heroes_name = $('select.hero').val();
+
+        const teamadded = [team_name,heroes_name]
+        console.log('Team added ' + teamadded.team_name);
+        console.log('Hero Associed ' + teamadded.heroes_name);
 
         //Create les valeurs dans la base de données
         fetch('marvel/heroes',
@@ -482,10 +480,10 @@ TeamListCompenent.prototype = {
                     'Content-Type': 'application/json'
                 },
                 method: "POST",
-                body: JSON.stringify(movieadded)
+                body: JSON.stringify(teamadded)
             })
             .then(resp => {
-                $('div.movie').remove();
+                $('div.team').remove();
                 const me = this;
                 me.fetchAll().then(function () {
                     me.render();
@@ -544,7 +542,7 @@ TeamItem.prototype = {
     renderS() {
 
         // Create Template
-        const template = `<option value="${this.id}">${this.team_name}</option>`;
+        const template = `<option class="team" value="${this.id}">${this.team_name}</option>`;
 
 
         // Element queryfied
