@@ -1,0 +1,74 @@
+body{
+	background-color: #8080ff;
+}
+
+div.page {
+    display: flex;
+    flex-direction: column;
+    background-color: bisque;
+}
+
+div.page.head {
+    display: flex;
+    height: 380px;
+    background-color: black;    
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    color: beige;
+    background-color: black;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    list-style: none;
+}
+        
+nav ul li {
+    flex: 0 1 auto;
+    font-size: 1.2em;
+    font-family: Impact, "Arial Black", Arial, Verdana, sans-serif;
+    line-height: 2em;
+    padding: 0 3em;
+}
+        
+nav ul li:hover {
+    background-color: #333;
+    font-size: 1.4em;
+}
+
+li button {
+	width: 200px;
+}
+
+body {
+	display: flex;
+	flex-direction: row ;
+}
+
+div {
+	display: flex;
+	height: 500px;
+}
+
+li  {
+	display: flex;
+    margin: 1em;
+    margin-right: 15em;
+    flex-direction: column;
+    text-align: center;
+}
+
+li hero{
+	margin-bottom: 1em;
+}
+
+li movie{
+	display: flex;
+	flex-direction: column;
+}
