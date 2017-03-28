@@ -96,3 +96,10 @@ nav ul li:hover {
     border-radius: 150px;
     background-color: darkgray;
 }
+
+a {
+    color: white;
+    background-color:transparent; 
+    text-decoration:none;
+
+}
